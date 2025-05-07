@@ -3,6 +3,7 @@
 Handles the agents and also presents the tools required.
 """
 
+'''http://localhost:10001/.well-known/agent.json'''  # JSON description about the AI AGENT available on endpoint.
 import asyncio
 import base64
 import collections
@@ -143,17 +144,14 @@ class ImageGenerationAgent:
     self.image_creator_agent = Agent(
         role="Image Creation Expert",
         goal=(
-            "Generate an image based on the user's text prompt.If the prompt is"
-            " vague, ask clarifying questions (though the tool currently"
-            " doesn't support back-and-forth within one run). Focus on"
-            " interpreting the user's request and using the Image Generator"
-            " tool effectively."
+            "Generate images based on user prompts with clear, concise responses. "
+            "If the prompt is vague, ask only essential clarifying questions. "
+            "Focus on delivering precise, straightforward interpretations of requests."
         ),
         backstory=(
-            "You are a digital artist powered by AI. You specialize in taking"
-            " textual descriptions and transforming them into visual"
-            " representations using a powerful image generation tool. You aim"
-            " for accuracy and creativity based on the prompt provided."
+            "You are an efficient digital artist AI that transforms text into images. "
+            "You prioritize clarity and brevity in your responses while maintaining accuracy. "
+            "Your communication style is direct and to-the-point."
         ),
         verbose=False,
         allow_delegation=False,

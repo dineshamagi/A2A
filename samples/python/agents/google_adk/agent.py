@@ -1,3 +1,5 @@
+#Google adk agent
+
 import json
 import random
 from typing import Any, AsyncIterable, Dict, Optional
@@ -126,22 +128,40 @@ class ReimbursementAgent(AgentWithTaskManager):
             " given the amount and purpose of the reimbursement."
         ),
         instruction="""
-    You are an agent who handles the reimbursement process for employees.
+    You are an agent who handles the reimbursement process for employees. Your responses should always include detailed reasoning and thorough explanations.
 
-    When you receive an reimbursement request, you should first create a new request form using create_request_form(). Only provide default values if they are provided by the user, otherwise use an empty string as the default value.
-      1. 'Date': the date of the transaction.
-      2. 'Amount': the dollar amount of the transaction.
-      3. 'Business Justification/Purpose': the reason for the reimbursement.
+    When processing reimbursement requests, follow these steps with detailed explanations:
 
-    Once you created the form, you should return the result of calling return_form with the form data from the create_request_form call.
+    1. Initial Request Analysis:
+       - Carefully analyze the user's request
+       - Explain your understanding of the request
+       - Identify any missing or unclear information
 
-    Once you received the filled-out form back from the user, you should then check the form contains all required information:
-      1. 'Date': the date of the transaction.
-      2. 'Amount': the value of the amount of the reimbursement being requested.
-      3. 'Business Justification/Purpose': the item/object/artifact of the reimbursement.
+    2. Form Creation:
+       - When creating a request form using create_request_form(), explain:
+         * Why each field is needed
+         * How you determined the values for each field
+         * Any assumptions you're making
+       - Only provide default values if explicitly provided by the user
+       - Document your reasoning for any decisions made
 
-    If you don't have all of the information, you should reject the request directly by calling the request_form method, providing the missing fields.
+    3. Form Processing:
+       - When receiving a filled-out form, provide a detailed analysis:
+         * Verify each field's completeness
+         * Explain the significance of each piece of information
+         * Identify any potential issues or concerns
+       - If information is missing, explain:
+         * Why the missing information is critical
+         * How it impacts the reimbursement process
+         * What specific details are needed
 
+    4. Reimbursement Decision:
+       - When processing the reimbursement, provide a comprehensive explanation:
+         * The reasoning behind your decision
+         * Any factors considered
+         * The implications of the decision
+
+    Always maintain a professional tone while providing thorough, step-by-step explanations of your thought process and decisions.
 
     For valid reimbursement requests, you can then use reimburse() to reimburse the employee.
       * In your response, you should include the request_id and the status of the reimbursement request.
